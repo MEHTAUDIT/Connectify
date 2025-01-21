@@ -1,5 +1,6 @@
 package com.sdp.post_service.controller;
 
+import com.sdp.post_service.auth.UserContextHolder;
 import com.sdp.post_service.dto.PostCreateRequestDto;
 import com.sdp.post_service.dto.PostDto;
 import com.sdp.post_service.entity.Post;
@@ -21,16 +22,17 @@ public class PostsController {
     private final PostService postService;
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postCreateRequestDto,
-                                              HttpServletRequest httpServletRequest) {
+    public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postCreateRequestDto) {
 
-        PostDto createdPost = postService.createPost(postCreateRequestDto, 1L);
+        PostDto createdPost = postService.createPost(postCreateRequestDto);
 
         return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
     }
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostDto> getPost(@PathVariable Long postId) {
+
+        Long userId= UserContextHolder.getCurrentUserId();
         PostDto postDto = postService.getPostById(postId);
 
         return ResponseEntity.ok(postDto);

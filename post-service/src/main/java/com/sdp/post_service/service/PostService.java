@@ -50,12 +50,6 @@ public class PostService {
 
     public PostDto getPostById(Long postId){
 
-        Long userId= UserContextHolder.getCurrentUserId();
-
-        List<PersonDto> firstConnections = connectionsClient.getFirstDegreeConnections(userId);
-
-        //Notifying the user's first degree connections about the post
-
         Post post=postRepository.findById(postId).orElseThrow(()->
                 new ResourceNotFoundException("Post not Found with id :"+postId));
 

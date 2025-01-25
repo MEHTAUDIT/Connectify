@@ -6,7 +6,7 @@ jwt.secretKey: bdndfndfndfndfnfdnfnfnfnfgnghmhgjmgmfhfghmjhmhmyu
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://discovery-server:8761/eureka
 
 server.port: 8078
 
